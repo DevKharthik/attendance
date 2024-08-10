@@ -198,8 +198,6 @@ app.get('/getAttendanceData', async (req, res) => {
     res.status(500).send('Error getting attendance data');
   }
 });
-
-
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);
 });
