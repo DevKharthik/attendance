@@ -56,8 +56,10 @@ app.post('/storeAttendance', async (req, res) => {
     for (const student of students) {
       const { name, rollno, present, date, course } = student;
 
+      // Check if attendance data already exists for the specified date and course
       let existingAttendance = await Attendance.findOne({ date, course });
 
+      // If the attendance data exists, update the student's attendance
       if (existingAttendance) {
         const existingStudent = existingAttendance.students.find(
           (existingStudent) => existingStudent.rollno === rollno
@@ -71,6 +73,7 @@ app.post('/storeAttendance', async (req, res) => {
         savedAttendanceData.push(updatedAttendance);
         console.log('Attendance updated successfully:', updatedAttendance);
       } else {
+        // If the attendance data does not exist, create a new attendance entry
         const newAttendance = new Attendance({
           date,
           course,
@@ -92,6 +95,7 @@ app.post('/storeAttendance', async (req, res) => {
 app.get('/getAttendance', async (req, res) => {
   const { course, startDate, endDate } = req.query;
 
+  
   try {
     const attendanceData = await Attendance.find({
       course,
@@ -157,6 +161,7 @@ app.get('/getstudentAttendance', async (req, res) => {
   }
 });
 
+
 app.get('/getAttendanceData', async (req, res) => {
   const { course, date } = req.query;
 
@@ -194,6 +199,7 @@ app.get('/getAttendanceData', async (req, res) => {
   }
 });
 
-app.listen(port, '0.0.0.0', () => {
+
+app.listen(port, () => {
   console.log(`Server is running on port ${port}`);
 });
