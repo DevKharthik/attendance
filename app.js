@@ -91,6 +91,7 @@ app.post('/storeAttendance', async (req, res) => {
     res.status(500).send('Error saving attendance data');
   }
 });
+
 app.get('/getAttendance', async (req, res) => {
   const { course, startDate, endDate } = req.query;
 
