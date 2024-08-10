@@ -95,6 +95,7 @@ app.post('/storeAttendance', async (req, res) => {
 app.get('/getAttendance', async (req, res) => {
   const { course, startDate, endDate } = req.query;
 
+  
   try {
     const attendanceData = await Attendance.find({
       course,
